@@ -1,0 +1,5 @@
+{
+    "Content": "./content/",
+    "PostData": "./content/%s/data.json",
+    "PostContent": "./content/%s/content.md"
+}
