@@ -3,6 +3,7 @@ package data
 import (
 	"encoding/json"
 	"gomd/models"
+	"gomd/path"
 	"io/ioutil"
 	"log"
 )
@@ -11,7 +12,7 @@ import (
 func GetBooks() []models.Book {
 	var books []models.Book
 
-	files, err := ioutil.ReadDir("./content/")
+	files, err := ioutil.ReadDir(path.GetContentPath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -19,7 +20,7 @@ func GetBooks() []models.Book {
 	for _, file := range files {
 		if file.IsDir() {
 			bookSlug := file.Name()
-			datafile, err := ioutil.ReadFile("./content/" + bookSlug + "/data.json")
+			datafile, err := ioutil.ReadFile(path.GetBookPathFor(bookSlug) + "data.json")
 
 			//todo: log error?
 			if err == nil {
@@ -36,7 +37,7 @@ func GetBooks() []models.Book {
 // GetBook is...
 func GetBook(bookSlug string) (models.Book, error) {
 
-	datafile, err := ioutil.ReadFile("./content/" + bookSlug + "/data.json")
+	datafile, err := ioutil.ReadFile(path.GetBookPathFor(bookSlug) + "data.json")
 	if err != nil {
 		return models.Book{}, err
 	}

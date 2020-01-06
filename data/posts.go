@@ -3,6 +3,7 @@ package data
 import (
 	"encoding/json"
 	"gomd/models"
+	"gomd/path"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -14,7 +15,7 @@ import (
 func GetPostsForBook(bookSlug string) []models.Post {
 	var posts []models.Post
 
-	files, err := ioutil.ReadDir("./content/" + bookSlug)
+	files, err := ioutil.ReadDir(path.GetBookPathFor(bookSlug))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -22,7 +23,7 @@ func GetPostsForBook(bookSlug string) []models.Post {
 	for _, file := range files {
 		if file.IsDir() {
 			postSlug := file.Name()
-			datafile, err := ioutil.ReadFile("./content/" + bookSlug + "/" + postSlug + "/data.json")
+			datafile, err := ioutil.ReadFile(path.GetPostPathFor(bookSlug, postSlug) + "data.json")
 
 			//todo: log error?
 			if err == nil {
@@ -39,12 +40,12 @@ func GetPostsForBook(bookSlug string) []models.Post {
 // GetPost is...
 func GetPost(bookSlug string, postSlug string) (models.Post, error) {
 
-	datafile, err := ioutil.ReadFile("./content/" + bookSlug + "/" + postSlug + "/data.json")
+	datafile, err := ioutil.ReadFile(path.GetPostPathFor(bookSlug, postSlug) + "data.json")
 	if err != nil {
 		return models.Post{}, err
 	}
 
-	contentfile, err := ioutil.ReadFile("./content/" + bookSlug + "/" + postSlug + "/content.md")
+	contentfile, err := ioutil.ReadFile(path.GetPostPathFor(bookSlug, postSlug) + "content.md")
 	if err != nil {
 		return models.Post{}, err
 	}
