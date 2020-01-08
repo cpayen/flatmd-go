@@ -11,7 +11,25 @@
 
 <body>
     <div class="container">
-        {{ .Post.Content }}
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <a href="/{{ .Book.URL }}">{{ .Book.Title }}</a>
+            <span>{{ .Post.Title }}</span>
+        </div>
+        <div class="book">
+            Book: {{ .Book.Title }}
+        </div>
+        <article class="post">
+            {{ .Post.Content }}
+        </article>
+        <div class="related">
+            <h2>Related posts</h2>
+            <ul>
+                {{ range .BookPosts }}
+                <li><a href="/{{ .URL }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
     </div>
 </body>
 

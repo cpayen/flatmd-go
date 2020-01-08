@@ -40,7 +40,9 @@ func handlePostRequest(c *gin.Context) {
 	bookSlug := c.Param("bookSlug")
 	postSlug := c.Param("postSlug")
 
+	book, err := data.GetBook(bookSlug)
 	post, err := data.GetPost(bookSlug, postSlug)
+	bookPosts := data.GetPostsForBook(bookSlug)
 
 	if err != nil {
 		fmt.Println(err)
@@ -50,6 +52,8 @@ func handlePostRequest(c *gin.Context) {
 	}
 
 	c.HTML(http.StatusOK, "post.tpl.html", gin.H{
-		"Post": post,
+		"Post":      post,
+		"Book":      book,
+		"BookPosts": bookPosts,
 	})
 }
