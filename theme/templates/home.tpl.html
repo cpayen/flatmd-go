@@ -1,9 +1,7 @@
 {{ define "content" }}
 <div class="container">
-    <h1>{{ .Book.Title }}</h1>
-    <em>{{ .Book.Description }}</em>
     <ul>
-        {{ range .Posts }}
+        {{ range .Books }}
         <li><a href="/{{ .URL }}">{{ .Title }}</a><br><em>{{ .Description }}</em></li>
         {{ end }}
     </ul>
