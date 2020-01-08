@@ -12,7 +12,9 @@ func handleHomeRequest(c *gin.Context) {
 	books := data.GetBooks()
 
 	c.HTML(http.StatusOK, "home", gin.H{
-		"Books": books,
+		"PageTitle":       "Welcome",
+		"PageDescription": "Welcome to gomd",
+		"Books":           books,
 	})
 }
 
@@ -31,8 +33,10 @@ func handleBookRequest(c *gin.Context) {
 	posts := data.GetPostsForBook(bookSlug)
 
 	c.HTML(http.StatusOK, "book", gin.H{
-		"Book":  book,
-		"Posts": posts,
+		"PageTitle":       book.Title,
+		"PageDescription": book.Description,
+		"Book":            book,
+		"Posts":           posts,
 	})
 }
 
@@ -52,8 +56,10 @@ func handlePostRequest(c *gin.Context) {
 	}
 
 	c.HTML(http.StatusOK, "post", gin.H{
-		"Post":      post,
-		"Book":      book,
-		"BookPosts": bookPosts,
+		"PageTitle":       post.Title,
+		"PageDescription": post.Description,
+		"Post":            post,
+		"Book":            book,
+		"BookPosts":       bookPosts,
 	})
 }
