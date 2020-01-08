@@ -1,5 +1,9 @@
 {{ define "content" }}
 <div class="container">
+    <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span>{{ .Book.Title }}</span>
+    </div>
     <h1>{{ .Book.Title }}</h1>
     <em>{{ .Book.Description }}</em>
     <ul>
