@@ -13,23 +13,20 @@ var paths = {
     tsDist: '../js'
 }
 
-function sassBuild() {
-    return src(paths.cssSrc)
-        .pipe(sass())
-        .pipe(cleanCss())
-        .pipe(dest(paths.cssDist));
-}
-exports.sassBuild = sassBuild;
-
 function sassDev() {
     return src(paths.cssSrc)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(dest(paths.cssDist))
-        //.pipe(livereload());
 }
-exports.sassDev = sassDev;
+
+function sassBuild() {
+    return src(paths.cssSrc)
+        .pipe(sass())
+        .pipe(cleanCss())
+        .pipe(dest(paths.cssDist));
+}
 
 function tsDev () {
     return src(paths.tsSrc)
@@ -39,7 +36,6 @@ function tsDev () {
         .pipe(sourcemaps.write())
         .pipe(dest(paths.tsDist));
 };
-exports.tsDev = tsDev;
 
 function tsBuild () {
     return src(paths.tsSrc)
@@ -47,25 +43,15 @@ function tsBuild () {
         .js
         .pipe(dest(paths.tsDist));
 };
-exports.tsBuild = tsBuild;
 
-function watchDev () {
+function liveDev () {
     livereload.listen(); 
     watch(['*.css', '*.html', '*.js']).on('change', livereload.changed);
     watch([paths.cssSrc], sassDev);
     watch([paths.tsSrc], tsDev);
 }
-exports.watchDev = watchDev;
 
 exports.default = parallel(sassBuild, tsBuild);
 exports.build = parallel(sassBuild, tsBuild);
 exports.dev = parallel(sassDev, tsDev);
-
-
-
-// gulp.task('watch', ['sass-dev'], function() {
-// 	livereload.listen();
-//     gulp.watch(['*.php', '*.html', '*.js']).on('change', livereload.changed);
-// 	gulp.watch('styles/**', ['sass-dev']);
-//     gulp.watch('scripts/*.ts', ['typescript-dev']);
-// });
+exports.live = liveDev;
