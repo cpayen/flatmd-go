@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gomd/core"
+	"gomd-web/core"
 )
 
 func main() {

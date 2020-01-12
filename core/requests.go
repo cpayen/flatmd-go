@@ -2,9 +2,9 @@ package core
 
 import (
 	"fmt"
-	"gomd/data"
 	"net/http"
 
+	"github.com/cpayen/gomd-web/data"
 	"github.com/gin-gonic/gin"
 )
 

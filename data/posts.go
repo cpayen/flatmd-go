@@ -2,11 +2,12 @@ package data
 
 import (
 	"encoding/json"
-	"gomd/models"
-	"gomd/path"
 	"html/template"
 	"io/ioutil"
 	"log"
+
+	"github.com/cpayen/gomd-web/models"
+	"github.com/cpayen/gomd-web/path"
 
 	"gopkg.in/russross/blackfriday.v2"
 )

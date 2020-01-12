@@ -2,10 +2,11 @@ package data
 
 import (
 	"encoding/json"
-	"gomd/models"
-	"gomd/path"
 	"io/ioutil"
 	"log"
+
+	"github.com/cpayen/gomd-web/models"
+	"github.com/cpayen/gomd-web/path"
 )
 
 // GetBooks is...
