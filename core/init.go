@@ -21,6 +21,7 @@ func Init() {
 	router.HTMLRender = createRenderer()
 	router.Use(gin.Logger())
 	router.Use(static.Serve("/assets", static.LocalFile("./theme/assets", false)))
+	router.Use(static.Serve("/medias", static.LocalFile("./content/medias", false)))
 
 	// Routes
 	router.GET("/", func(c *gin.Context) { handleHomeRequest(c) })

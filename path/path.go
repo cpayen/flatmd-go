@@ -5,9 +5,9 @@ import (
 )
 
 var (
-	content string = "./content/"
-	book    string = "./content/%s/"
-	post    string = "./content/%s/%s/"
+	content string = "./content/pages/"
+	book    string = "./content/pages/%s/"
+	post    string = "./content/pages/%s/%s/"
 )
 
 // GetContentPath is..
