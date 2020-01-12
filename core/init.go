@@ -22,6 +22,7 @@ func Init() {
 	router.Use(gin.Logger())
 	router.Use(static.Serve("/assets", static.LocalFile("./theme/assets", false)))
 	router.Use(static.Serve("/medias", static.LocalFile("./content/medias", false)))
+	router.Use(static.Serve("/", static.LocalFile("./content/pages", false)))
 
 	// Routes
 	router.GET("/", func(c *gin.Context) { handleHomeRequest(c) })
